@@ -1,0 +1,6 @@
+node_modules/
+.vscode/
+champions.json
+champions/
+dist/
+.cache/
