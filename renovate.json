@@ -14,7 +14,7 @@
     {
       "matchDatasources": "npm",
       "stabilityDays": 3,
-      "assignees": ["manokii", "skycladobserver", "aa-blissey"],
+      "assignees": ["manokii"],
       "assigneesSampleSize": 1,
       "bumpVersion": "patch",
       "commitMessagePrefix": "chore(deps)",
