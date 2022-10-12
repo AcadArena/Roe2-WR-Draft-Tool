@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createWriteStream, existsSync, mkdirSync } from "fs";
+import { Champion } from "../types/champion";
+import args from "./args";
 import getChampions from "./getChampions";
-import { Champion } from "./types/champion";
 
 type Task = () => Promise<void>;
 type Tasks = Array<Task>;
@@ -27,14 +28,19 @@ export const downloadFileTask =
     });
   };
 
-export const init = async () => {
+export const initAssets = async () => {
   const folder = "./.cache";
   const tasks: Tasks = [];
   if (!existsSync(folder)) {
     console.log("Cache not found, creating cache folder...");
     mkdirSync(folder);
   }
+
   const champs = await getChampions();
+
+  if (args.skipDownload) {
+    return console.log("Skipping asset download");
+  }
 
   champs.forEach((champ) => {
     const path = `${folder}/${champ.name}`;
