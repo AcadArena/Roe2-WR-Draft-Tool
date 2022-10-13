@@ -6,13 +6,11 @@ export interface Ban {
   id: number;
   champion: Champion;
   status: Status;
-  isActive: false;
 }
 
 export interface Pick {
   id: number;
   champion: Champion;
-  isActive: boolean;
   status: Status;
   displayName: string;
 }
@@ -24,7 +22,7 @@ export interface Team {
 }
 
 export interface State {
-  status: "paused" | "running";
+  status: "paused" | "running" | "completed";
   timer: number;
   teamA: Team;
   teamB: Team;

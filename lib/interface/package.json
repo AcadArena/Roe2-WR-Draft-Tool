@@ -1,0 +1,12 @@
+{
+  "name": "interface",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "files": [
+    "**.ts"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "4.8.4"
+  }
+}

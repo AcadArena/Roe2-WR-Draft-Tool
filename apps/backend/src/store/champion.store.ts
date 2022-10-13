@@ -1,2 +1,2 @@
-import type { Champion } from "../types/champion";
+import type { Champion } from "interface/champion";
 export const championStore = new Map<string, Champion>();

@@ -1,11 +1,13 @@
+import { SocketEvent } from "interface/socket";
 import type { Server } from "socket.io";
-import { decrementTimer } from "../store/state.store";
+import { decrementTimer, setState } from "../store/state.store";
 
 export class TickManager {
   wsServer: Server;
   timeout?: NodeJS.Timeout;
   tickRate = 1;
   interval = 1000;
+  active: boolean = false;
 
   constructor(ws: Server) {
     this.wsServer = ws;
@@ -13,14 +15,18 @@ export class TickManager {
 
   start() {
     console.log(`Ticker started with tick rate: ${this.tickRate} tick/s `);
+    if (this.active) return;
+    this.active = true;
     this.timeout = setInterval(() => {
-      const newState = decrementTimer();
-      this.wsServer.emit("state", newState);
+      this.wsServer.emit(SocketEvent.State, decrementTimer());
     }, this.interval / this.tickRate);
   }
 
-  stop() {
-    if (!this.timeout) return;
+  pause(emit = true) {
+    this.active = false;
+    if (emit) {
+      this.wsServer.emit(SocketEvent.State, setState({ status: "paused" }));
+    }
     clearInterval(this.timeout);
   }
 }

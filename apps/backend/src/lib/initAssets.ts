@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createWriteStream, existsSync, mkdirSync } from "fs";
-import { Champion } from "../types/champion";
+import { Champion } from "interface/champion";
 import args from "./args";
 import getChampions from "./getChampions";
 

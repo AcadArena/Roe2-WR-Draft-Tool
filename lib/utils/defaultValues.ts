@@ -1,12 +1,13 @@
-import { Champion } from "../types/champion";
-import { Ban, Pick, State, Team } from "../types/state";
-import {
+import { Champion } from "interface/champion";
+import { Ban, Pick, State, Team } from "interface/state";
+
+import type {
   AllContentstackChampionDetailNode,
   HeroVideo,
   Role,
   Skin,
   Video,
-} from "../types/wr_api_champion";
+} from "interface/wr_api_champion";
 
 export const defaultIconUrl: { url: string; title: string } = {
   title: "",
@@ -64,14 +65,12 @@ export const defaultSkin: Skin = {
 export const defaultBan: Ban = {
   id: 0,
   champion: defaultChampion,
-  isActive: false,
   status: "pending",
 };
 
 export const defaultPick: Pick = {
   id: 0,
   champion: defaultChampion,
-  isActive: false,
   status: "pending",
   displayName: "",
 };
@@ -97,7 +96,13 @@ export const defaultTeam: Team = {
 
 export const defaultState: State = {
   status: "paused",
-  teamA: defaultTeam,
+  teamA: {
+    ...defaultTeam,
+    isActive: true,
+    bans: defaultBans.map((ban) =>
+      ban.id === 0 ? { ...ban, status: "active" } : ban
+    ),
+  },
   teamB: defaultTeam,
   timer: 25,
   currentSequence: 0,
