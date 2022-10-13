@@ -1,5 +1,5 @@
-import { defaultState } from "../lib/defaultValues";
-import { Ban, Pick, State, Team } from "../types/state";
+import { Ban, Pick, State, Team } from "interface/state";
+import { defaultState } from "utils/defaultValues";
 
 export let state: State = defaultState;
 
@@ -10,7 +10,7 @@ export const setState = (payload: Partial<State>) => {
 
 export const decrementTimer = (num: number = 1) => {
   const newTime = state.timer - num;
-  return setState({ timer: newTime <= 0 ? 0 : newTime });
+  return setState({ timer: newTime <= 0 ? 0 : newTime, status: "running" });
 };
 
 export const getTeam = (team: "teamA" | "teamB") => {
@@ -18,7 +18,10 @@ export const getTeam = (team: "teamA" | "teamB") => {
 };
 
 export const setTeam = (team: "teamA" | "teamB", payload: Partial<Team>) => {
-  return setState({ [team]: { ...state[team], ...payload } });
+  if (team === "teamA") {
+    return setState({ teamA: { ...state.teamA, ...payload } });
+  }
+  return setState({ teamB: { ...state.teamB, ...payload } });
 };
 
 export const setPicks = (team: "teamA" | "teamB", payload: Array<Pick>) => {
@@ -26,15 +29,14 @@ export const setPicks = (team: "teamA" | "teamB", payload: Array<Pick>) => {
 };
 
 export const setPick = (
-  team: "teamA" | "teamB",
+  side: "teamA" | "teamB",
   id: number,
   payload: Partial<Pick>
 ) => {
-  const picks = getTeam(team).picks;
-  if (picks[id]) {
-    picks[id] = { ...picks[id], ...payload };
-  }
-  return setPicks(team, picks);
+  const newPicks = getTeam(side).picks.map((val) =>
+    val.id === id ? { ...val, ...payload } : val
+  );
+  return setPicks(side, newPicks);
 };
 
 export const setBans = (team: "teamA" | "teamB", payload: Array<Ban>) => {

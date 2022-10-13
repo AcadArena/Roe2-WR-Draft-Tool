@@ -1,6 +1,7 @@
 import { createServer } from "http";
 import { initExpressServer } from "./express.server";
 import { initAssets } from "./lib/initAssets";
+import { sanitizedChampList } from "./lib/sanitizedChampList";
 import { TickManager } from "./lib/ticker";
 import { initWsServer } from "./ws.server";
 
@@ -11,7 +12,7 @@ export const tickManager = new TickManager(io);
 
 async function main() {
   await initAssets();
-
+  io.emit("champs", sanitizedChampList());
   const port = 1338;
   server.listen(port, () => {
     if (server.address() === null) {

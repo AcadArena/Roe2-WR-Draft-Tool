@@ -1,11 +1,11 @@
 import axios from "axios";
 import { existsSync, readFileSync, writeFileSync } from "fs";
+import { Champion } from "interface/champion";
+import { WildRiftAPIResponse } from "interface/wr_api_champion";
+import { WildRiftAPIResposeAllChampions } from "interface/wr_api_champios_all";
+import { defaultApiChampion, defaultSkin } from "utils/defaultValues";
 import { championStore } from "../store";
-import { Champion } from "../types/champion";
-import { WildRiftAPIResponse } from "../types/wr_api_champion";
-import { WildRiftAPIResposeAllChampions } from "../types/wr_api_champios_all";
 import args from "./args";
-import { defaultApiChampion, defaultSkin } from "./defaultValues";
 
 async function getChampions() {
   const filePath = "./.cache/champions.json";
