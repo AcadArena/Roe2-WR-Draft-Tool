@@ -1,6 +1,6 @@
 import { Stack } from "@mantine/core";
-import ChampSelect from "../comps/ChampSelect";
-import SequenceSelectProvider from "../contexts/sequenceSelect.provider";
+import ChampSelect from "../../comps/ChampSelect";
+import SequenceSelectProvider from "../../contexts/sequenceSelect.provider";
 
 const Controller = () => {
   return (

@@ -24,8 +24,9 @@ export function Loadable<T extends object = {}>(
 /* ========================================================================== */
 
 const Controller = Loadable(lazy(() => import("./pages/Controller")));
-const OverlayAllGs2 = Loadable(lazy(() => import("./pages/Overlay.allgs2")));
-/* ========================================================================== */
+const OverlayAllGs2 = Loadable(lazy(() => import("./pages/AllGS2")));
+
+/* ========================================================================= */
 // 			Router
 /* ========================================================================== */
 
@@ -36,13 +37,8 @@ const Router = () => {
       element: <Controller />,
     },
     {
-      path: "overlay",
-      children: [
-        {
-          path: "allgs2",
-          element: <OverlayAllGs2 />,
-        },
-      ],
+      path: "allgs2",
+      element: <OverlayAllGs2 />,
     },
   ]);
 };
