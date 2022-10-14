@@ -20,7 +20,6 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
             }}
           >
             <GreycliffCF />
-
             <App />
           </MantineProvider>
         </SocketProvider>
