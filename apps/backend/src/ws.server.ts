@@ -177,7 +177,7 @@ export const initWsServer = (httpServer: HttpServer) => {
           ? { ...p, champion: activeChamp }
           : p
       );
-      socket.emit(SocketEvent.State, setPicks(side, newPicks));
+      io.emit(SocketEvent.State, setPicks(side, newPicks));
     });
 
     /* ====================================================================
