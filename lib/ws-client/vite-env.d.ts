@@ -1,7 +1,7 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  readonly PROD: boolean;
+  readonly VITE_VERCEL_ENV: "production" | "development" | "preview";
 }
 
 interface ImportMeta {
