@@ -15,7 +15,7 @@ import { sanitizedChampList } from "./lib/sanitizedChampList";
 import { setPick, setPicks, setState, state } from "./store/state.store";
 
 export const initWsServer = (httpServer: HttpServer) => {
-  const io = new Server(httpServer, { cors: { origin: "*" } });
+  const io = new Server(httpServer, { cors: { origin: true } });
 
   io.on("connection", (socket) => {
     console.log(`[${socket.id}] connected`);
