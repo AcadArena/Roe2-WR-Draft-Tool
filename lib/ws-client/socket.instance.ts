@@ -11,7 +11,11 @@ const PROD_URL = "https://servers.acadarena.com";
 const URL = isProd ? PROD_URL : DEV_URL;
 const PATH = isProd ? "/wr/socket.io" : "/socket.io";
 
-export const socket = io({ host: URL, path: PATH });
+const config = { host: URL, path: PATH };
+export const socket = io(URL, {
+  ...config,
+  reconnection: true,
+});
 
 socket.on("state", (state: State) => {
   globalDispatch(setState({ state }));
