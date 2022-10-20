@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 import { globalDispatch, setState } from "store/";
 import { setChamps } from "store/redux.champs.slice";
 
-const isDev = import.meta.env.DEV;
+const isDev = !!import.meta.env.DEV;
 const DEV_URL = `${window.location.hostname}:1338`;
 const PROD_URL = "https://servers.acadarena.com/wr";
 const URL = isDev ? DEV_URL : PROD_URL;
