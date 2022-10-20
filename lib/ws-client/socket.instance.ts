@@ -4,16 +4,13 @@ import { io } from "socket.io-client";
 import { globalDispatch, setState } from "store/";
 import { setChamps } from "store/redux.champs.slice";
 
-const isDev = !!import.meta.env.DEV;
+const isProd = !!import.meta.env.PROD;
 const DEV_URL = `${window.location.hostname}:1338`;
 const PROD_URL = "https://servers.acadarena.com/wr";
-const URL = isDev ? DEV_URL : PROD_URL;
-const PATH = isDev ? "/socket.io" : "/wr/socket.io";
+const URL = isProd ? PROD_URL : DEV_URL;
+const PATH = isProd ? "/wr/socket.io" : "/socket.io";
 
-export const socket = io({
-  host: URL,
-  path: PATH,
-});
+export const socket = io({ host: URL, path: PATH });
 
 socket.on("state", (state: State) => {
   globalDispatch(setState({ state }));
