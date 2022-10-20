@@ -4,9 +4,9 @@ import { io } from "socket.io-client";
 import { globalDispatch, setState } from "store/";
 import { setChamps } from "store/redux.champs.slice";
 
-const isProd = import.meta.env.VITE_VERCEL_ENV === "production";
+const isProd = import.meta.env.ENV === "production";
 const DEV_URL = `${window.location.hostname}:1338`;
-const PROD_URL = "https://servers.acadarena.com/wr";
+const PROD_URL = "https://servers.acadarena.com";
 const URL = isProd ? PROD_URL : DEV_URL;
 const PATH = isProd ? "/wr/socket.io" : "/socket.io";
 
