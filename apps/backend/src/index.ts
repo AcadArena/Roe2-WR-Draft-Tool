@@ -11,8 +11,6 @@ const io = initWsServer(server);
 export const tickManager = new TickManager(io);
 
 async function main() {
-  await initAssets();
-  io.emit("champs", sanitizedChampList());
   const port = 1338;
   server.listen(port, () => {
     if (server.address() === null) {
@@ -20,6 +18,8 @@ async function main() {
     }
     console.log(`Server started on port ${port}`);
   });
+  await initAssets();
+  io.emit("champs", sanitizedChampList());
 }
 
-main().then();
+main();
