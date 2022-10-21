@@ -10,16 +10,15 @@ const server = createServer(app);
 const io = initWsServer(server);
 export const tickManager = new TickManager(io);
 
-async function main() {
-  const port = 1338;
-  server.listen(port, () => {
-    if (server.address() === null) {
-      return console.log("Failed to start server.");
-    }
-    console.log(`Server started on port ${port}`);
-  });
-  await initAssets();
-  io.emit("champs", sanitizedChampList());
-}
+const port = 1338;
 
-main();
+initAssets().then(() => {
+  io.emit("champs", sanitizedChampList());
+});
+
+server.listen(port, () => {
+  if (server.address() === null) {
+    return console.log("Failed to start server.");
+  }
+  console.log(`Server started on port ${port}`);
+});
