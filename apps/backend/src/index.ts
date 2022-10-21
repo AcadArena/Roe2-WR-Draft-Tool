@@ -20,6 +20,7 @@ async function main() {
     console.log(`Server started on port ${port}`);
   });
   await initAssets();
+  // init all champs on load
   io.emit("champs", sanitizedChampList());
 }
 
