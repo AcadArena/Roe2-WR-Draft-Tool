@@ -1,4 +1,4 @@
 {
   "include": ["./"],
-  "extends": "tsconfig/base.json"
+  "extends": "tsconfig/vite.json"
 }
